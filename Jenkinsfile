@@ -22,11 +22,12 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying the application in Tomcat'
+        input(message: 'Do you want to deploy application', id: 'yes')
       }
     }
 
   }
   environment {
-    ChromeDriverPath = '/home/rajeev/ChromeDriver'
+    ChromeDriverPath = '/home/rajeev/ChromeDriver/ChromeDriver.sh'
   }
 }

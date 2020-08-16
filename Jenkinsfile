@@ -21,8 +21,8 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        echo 'Deploying the application in Tomcat'
         input(message: 'Do you want to deploy application', id: 'yes')
+        echo 'Deploying the application in Tomcat'
       }
     }
 

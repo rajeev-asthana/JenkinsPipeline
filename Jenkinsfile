@@ -17,10 +17,9 @@ pipeline {
         }
 
         stage('Test log') {
-          environment{
-            LocalVariable = "HelloLocal"
+          environment {
+            LocalVariable = 'HelloLocal'
           }
-
           steps {
             writeFile(file: 'LogTestFile.txt', text: "This is the chrome driver path ${ChromeDriverPath} and localvariable value ${LocalVariable}")
           }
@@ -30,10 +29,16 @@ pipeline {
     }
 
     stage('Deploy') {
+
+        when {
+        branch 'master'
+        }
+
       parallel {
+
         stage('Deploy') {
           steps {
-            input(message: 'Do you want to deploy application', id: 'yes')
+            input(message: 'Do you want to deploy application ?', id: 'yes')
             echo 'Deploying the application in Tomcat'
           }
         }

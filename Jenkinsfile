@@ -26,9 +26,20 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        input(message: 'Do you want to deploy application', id: 'yes')
-        echo 'Deploying the application in Tomcat'
+      parallel {
+        stage('Deploy') {
+          steps {
+            input(message: 'Do you want to deploy application', id: 'yes')
+            echo 'Deploying the application in Tomcat'
+          }
+        }
+
+        stage('Artifact') {
+          steps {
+            archiveArtifacts 'LogTestFile.txt'
+          }
+        }
+
       }
     }
 
